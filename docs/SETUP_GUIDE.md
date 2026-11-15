@@ -75,10 +75,10 @@ The first run downloads libraries and can take a few minutes. You are done when 
 
 | Item | Version |
 |---|---|
-| Java | (fill in) |
-| Spring Boot | (fill in) |
-| Maven wrapper | (fill in) |
-| Date confirmed running | (fill in) |
+| Java | 21.0.2 (run in IntelliJ; `pom.xml` targets Java 17) |
+| Spring Boot | 3.5.15 (from `pom.xml`; Tomcat 10.1.55, Hibernate 6.6.53.Final, H2 2.3.232 shown in the startup log) |
+| Maven | IntelliJ's built-in Maven (version not recorded). The Maven wrapper (`mvnw`) is not in the repo yet |
+| Date confirmed running | 2026-11-15, Member 1: `Started TenantApplication in 5.58 seconds` |
 
 ## 9. Common problems
 
