@@ -12,7 +12,7 @@ Status: **written before the code exists.** The install steps are standard, but 
 | VS Code + "Extension Pack for Java" | Editor | Yes (code.visualstudio.com). IntelliJ IDEA Community also works |
 | Postman | Test the API | Yes (free plan, postman.com) |
 | A browser (Chrome, Edge or Firefox) | Use the web interface | Yes |
-| Maven | Builds the project | Optional: the project includes the Maven wrapper (`mvnw`), so you do not have to install Maven |
+| Maven 3.9 or newer | Builds the project | Yes (maven.apache.org). The Maven wrapper (`mvnw`) is **not in the repo yet**; Member 1 adds it in T-02. Until then, install Maven and use `mvn` |
 
 An ordinary student laptop is enough. Run only **one** copy of the app at a time.
 
@@ -50,9 +50,8 @@ git --version
 
 In the VS Code terminal, inside the `TENANT` folder:
 
-- Windows: `mvnw.cmd spring-boot:run`
-- Mac or Linux: `./mvnw spring-boot:run`
-- If you installed Maven yourself: `mvn spring-boot:run`
+- With Maven installed: `mvn spring-boot:run`
+- Only after the Maven wrapper is added to the repo: Windows `mvnw.cmd spring-boot:run`, Mac or Linux `./mvnw spring-boot:run`
 
 The first run downloads libraries and can take a few minutes. You are done when the console shows a line like `Started TenantApplication`. Leave the terminal open. **Stop the app** with `Ctrl+C`.
 
@@ -76,10 +75,10 @@ The first run downloads libraries and can take a few minutes. You are done when 
 
 | Item | Version |
 |---|---|
-| Java | (fill in) |
-| Spring Boot | (fill in) |
-| Maven wrapper | (fill in) |
-| Date confirmed running | (fill in) |
+| Java | 21.0.2 (run in IntelliJ; `pom.xml` targets Java 17) |
+| Spring Boot | 3.5.15 (from `pom.xml`; Tomcat 10.1.55, Hibernate 6.6.53.Final, H2 2.3.232 shown in the startup log) |
+| Maven | IntelliJ's built-in Maven (version not recorded). The Maven wrapper (`mvnw`) is not in the repo yet |
+| Date confirmed running | 2026-11-15, Member 1: `Started TenantApplication in 5.58 seconds` |
 
 ## 9. Common problems
 
