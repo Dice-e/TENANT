@@ -12,7 +12,7 @@ Status: **written before the code exists.** The install steps are standard, but 
 | VS Code + "Extension Pack for Java" | Editor | Yes (code.visualstudio.com). IntelliJ IDEA Community also works |
 | Postman | Test the API | Yes (free plan, postman.com) |
 | A browser (Chrome, Edge or Firefox) | Use the web interface | Yes |
-| Maven | Builds the project | Optional: the project includes the Maven wrapper (`mvnw`), so you do not have to install Maven |
+| Maven 3.9 or newer | Builds the project | Yes (maven.apache.org). The Maven wrapper (`mvnw`) is **not in the repo yet**; Member 1 adds it in T-02. Until then, install Maven and use `mvn` |
 
 An ordinary student laptop is enough. Run only **one** copy of the app at a time.
 
@@ -50,9 +50,8 @@ git --version
 
 In the VS Code terminal, inside the `TENANT` folder:
 
-- Windows: `mvnw.cmd spring-boot:run`
-- Mac or Linux: `./mvnw spring-boot:run`
-- If you installed Maven yourself: `mvn spring-boot:run`
+- With Maven installed: `mvn spring-boot:run`
+- Only after the Maven wrapper is added to the repo: Windows `mvnw.cmd spring-boot:run`, Mac or Linux `./mvnw spring-boot:run`
 
 The first run downloads libraries and can take a few minutes. You are done when the console shows a line like `Started TenantApplication`. Leave the terminal open. **Stop the app** with `Ctrl+C`.
 
