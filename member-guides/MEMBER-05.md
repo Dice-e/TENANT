@@ -6,6 +6,62 @@ Read `CLAUDE.md` first. All code below is a **plan or example**. Nothing has bee
 
 ---
 
+## Taglish: Step-by-step (simulan dito)
+
+Ito ang mabilis na bersyon sa Taglish para sa **Member 5 (Security: login, roles, CSRF)**. Nasa ibaba ang buong paliwanag sa English (mga section 1 hanggang 19), at doon din nakasulat ang code na halimbawa. Hindi nagbago ang mga numero ng section.
+
+Paalala: ang code sa guide na ito ay halimbawa pa lang at hindi pa napapatakbo. Ikaw ang magpapatakbo at magte-test, at ikaw ang magsasabi kung ano ang totoong nangyari.
+
+### A. Unang setup (isang beses lang)
+
+1. Buksan ang email mo at tanggapin ang invite ng GitHub para sa repo na `Dice-e/TENANT`.
+2. Sa **GitHub Desktop**: **File > Clone repository** > piliin ang `Dice-e/TENANT` > **Clone**.
+3. I-click ang **Current Branch** at piliin ang branch mo: `feature/member-05-security`. Kung wala sa listahan, i-click muna ang **Fetch origin**.
+4. **Branch > Update from develop**. Importante ito para makuha mo ang skeleton ng project at ang gawa ng iba.
+5. Buksan ang folder sa **IntelliJ**: **File > Open** > piliin ang `pom.xml` > **Open as Project**. Hintayin matapos ang loading sa baba. (Kung VS Code: **File > Open Folder**.)
+6. Siguraduhing Java 17 pataas ang gamit: **File > Project Structure > Project > SDK**. Kung wala, **Add SDK > Download JDK > 21**.
+7. Subukan kung tumatakbo: buksan ang `TenantApplication.java` > i-click ang green ▶ > **Run**. Dapat makita mo ang `Started TenantApplication`. I-stop gamit ang red ■.
+
+### B. Ang gagawin mo
+
+1. **Bago magsimula:** hintayin na naka-merge sa `develop` ang controller ni Member 4, para makita mo munang gumagana ang API bago mo i-lock. Habang naghihintay, ipabasa kay Claude ang tungkol sa authentication, authorization, at CSRF.
+2. **Branch > Update from develop** ulit. Patakbuhin ang app at subukan ang GET sa Postman. Dapat 200 pa rin dahil bukas pa.
+3. **T-14:** Gawin ang `AppUser` (`entity`) at `AppUserRepository` na may `findByUsername`.
+4. **T-15:** Sabihan muna si Member 1, tapos idagdag sa `pom.xml` ang `spring-boot-starter-security` (section 3.1 ng guide). Pagkatapos nito, dapat **401** na ang GET na walang login. Patunay iyon na gumagana ang lock.
+5. Gawin ang `SecurityConfig` at `DbUserDetailsService`. Ang pagkakasunod ng rules ay mahalaga: DELETE para sa ADMIN muna, bago ang `anyRequest().authenticated()`. **Huwag i-disable ang CSRF.**
+6. **T-16:** Gawin ang `DemoAccountSeeder` para sa `staff/staff123` (USER) at `admin/admin123` (ADMIN).
+7. Test sa Postman: Authorization > Basic Auth. Tamang password = 200. Maling password = 401.
+8. **T-17 (ang pinakamahirap):** Subukan muna ang cookie option para sa CSRF, at isang oras lang ang limit. Kung hindi gumana, lumipat sa token endpoint.
+9. Punan ang 5-row table sa section 3.6 ng guide gamit ang **totoong** resulta, may screenshot bawat isa.
+10. Ibigay ang tamang steps kina Member 1 at Member 6. Optional: `GET /api/me`.
+
+### C. Paano gamitin ang Claude
+
+1. Sa Claude, i-upload ang `CLAUDE.md`, ang guide mo (`member-guides/MEMBER-05.md`), at ang SD1 Chapter 4 PDF (ipapadala ni Member 1 sa chat, wala ito sa GitHub). Idagdag ang files ng ibang member na kailangan mo: `PaymentRecordController` at `pom.xml`.
+2. I-paste ang **master prompt** (section 10 ng guide na ito).
+3. Isa-isang phase lang. Huwag magpa-generate ng lahat nang sabay.
+4. Pagkatapos ng bawat phase, patakbuhin at i-test mo. I-paste kay Claude ang **totoong** output o error, hindi ang kuwento mo lang.
+5. Sagutin ang mga tanong ni Claude. Kung hindi mo masagot, ipaturo ulit hanggang maintindihan mo.
+
+### D. Kapag tapos na at gumagana
+
+1. Sa GitHub Desktop, tingnan ang **Changes**. Dapat sarili mong files lang ang nandoon. Kung may ibang file, huminto at magtanong kay Member 1.
+2. Isulat ang summary (hal. `Add RentPaymentRecord entity`) at i-click ang **Commit to feature/member-05-security**.
+3. I-click ang **Push origin**.
+4. **Branch > Create pull request**. Sa **base**, dapat `develop` (HINDI `main`). Sa compare, `feature/member-05-security`.
+5. Punan ang PR template sa `GITHUB_WORKFLOW.md`, kasama ang **totoong** test result (console o Postman screenshot).
+6. Ilipat ang issue mo sa **Review** sa board at magpa-review sa ibang member.
+7. **Huwag i-merge ang sarili mong PR.** Ayusin ang comments ng reviewer, mag-commit, at mag-push ulit.
+8. Pagkatapos ma-merge: **Fetch origin**, tapos **Branch > Update from develop** bago ang susunod na task.
+
+### E. Kapag may problema
+
+1. I-copy ang **buong** error text (o mag-screenshot), hindi ang buod lang.
+2. I-paste kay Claude at sabihin kung anong file at anong ginawa mo bago lumabas.
+3. Kung hindi pa rin malutas, i-send sa group chat kay Member 1.
+
+---
+
 ## 1. Your role and mission
 
 You protect the API. You decide who may enter (**authentication**) and what they may do (**authorization**): both demo roles may read, create and update; only ADMIN may delete. You also make the demo accounts, keep CSRF protection on, and find a documented way for clients to send a valid CSRF token.
