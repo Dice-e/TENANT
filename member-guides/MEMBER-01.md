@@ -6,6 +6,57 @@ Read `CLAUDE.md` first. Everything here is a **plan**. Nothing has been run yet,
 
 ---
 
+## Taglish: Step-by-step (simulan dito)
+
+Ito ang mabilis na bersyon sa Taglish para sa **Member 1 (Leader at Frontend)**. Nasa ibaba ang buong paliwanag sa English (mga section 1 hanggang 19), at doon din nakasulat ang code na halimbawa. Hindi nagbago ang mga numero ng section.
+
+Paalala: ang code sa guide na ito ay halimbawa pa lang at hindi pa napapatakbo. Ikaw ang magpapatakbo at magte-test, at ikaw ang magsasabi kung ano ang totoong nangyari.
+
+### A. Setup
+
+Tapos mo na ito (clone, branch, at pagpapatakbo ng skeleton). Sa IntelliJ, **File > Open** > `pom.xml` > **Open as Project**. Kung mag-update ng ibang code, **Branch > Update from develop** muna.
+
+### B. Ang gagawin mo
+
+1. Tapos mo na ang T-01 (GitHub setup) at T-02 (skeleton). Ang natitira sa iyo ay T-03 at T-04, at ang pag-review ng PRs ng iba.
+2. **T-03:** Gumawa ng folder `src/main/resources/static`. Sa loob, gumawa ng `index.html` at ng folder na `css` na may `tenant.css`.
+3. Ilagay sa `tenant.css` ang Palette 2 na kulay bilang CSS variables (nasa section 3.3 ng guide). Sa buong CSS, `var(--...)` lang ang gagamitin, walang direktang hex na kulay sa labas ng `:root`.
+4. Gawin ang mga screen: sign in, overview, records, add/edit, at details. Sa unang bersyon, wala pang API.
+5. Patakbuhin ang app at buksan ang `http://localhost:8080`. Kapag hindi nagbabago ang itsura, i-refresh gamit ang Ctrl+Shift+R.
+6. I-resize ang browser sa mga 375px (phone) at 1280px (desktop). Subukan ding gamitin ang Tab key. Mag-screenshot para sa PR.
+7. Isulat sa PR ang contrast numbers ng text at background (gumamit ng contrast checker).
+8. **T-04:** Hintayin munang ma-merge sa `develop` ang controller ni Member 4 at ang security ni Member 5. Tapos gawin ang `js/api.js`, `auth.js`, `ui.js`, at `app.js` at ikonekta sa totoong API.
+9. Tingnan sa browser DevTools > Application > Local Storage na **walang naka-save na password**.
+10. Wording: "Record saved" at "Payment record" lang. Hindi "Payment received", at walang payment method.
+11. Mag-review ng PR ng bawat member. Hindi mo irere-review ang sarili mong PR.
+
+### C. Paano gamitin ang Claude
+
+1. Sa Claude, i-upload ang `CLAUDE.md`, ang guide mo (`member-guides/MEMBER-01.md`), at ang SD1 Chapter 4 PDF (ipapadala ni Member 1 sa chat, wala ito sa GitHub). Idagdag ang files ng ibang member na kailangan mo: `pom.xml` at ang controller ni Member 4 (kapag nagkokonekta ka na sa API).
+2. I-paste ang **master prompt** (section 10 ng guide na ito).
+3. Isa-isang phase lang. Huwag magpa-generate ng lahat nang sabay.
+4. Pagkatapos ng bawat phase, patakbuhin at i-test mo. I-paste kay Claude ang **totoong** output o error, hindi ang kuwento mo lang.
+5. Sagutin ang mga tanong ni Claude. Kung hindi mo masagot, ipaturo ulit hanggang maintindihan mo.
+
+### D. Kapag tapos na at gumagana
+
+1. Sa GitHub Desktop, tingnan ang **Changes**. Dapat sarili mong files lang ang nandoon. Kung may ibang file, huminto at magtanong kay Member 1.
+2. Isulat ang summary (hal. `Add RentPaymentRecord entity`) at i-click ang **Commit to feature/member-01-frontend**.
+3. I-click ang **Push origin**.
+4. **Branch > Create pull request**. Sa **base**, dapat `develop` (HINDI `main`). Sa compare, `feature/member-01-frontend`.
+5. Punan ang PR template sa `GITHUB_WORKFLOW.md`, kasama ang **totoong** test result (console o Postman screenshot).
+6. Ilipat ang issue mo sa **Review** sa board at magpa-review sa ibang member.
+7. **Huwag i-merge ang sarili mong PR.** Ayusin ang comments ng reviewer, mag-commit, at mag-push ulit.
+8. Pagkatapos ma-merge: **Fetch origin**, tapos **Branch > Update from develop** bago ang susunod na task.
+
+### E. Kapag may problema
+
+1. I-copy ang **buong** error text (o mag-screenshot), hindi ang buod lang.
+2. I-paste kay Claude at sabihin kung anong file at anong ginawa mo bago lumabas.
+3. Kung hindi pa rin malutas, i-send sa group chat kay Member 1.
+
+---
+
 ## 1. Your role and mission
 
 You keep six people moving in the same direction and you build the part users actually see: the web pages. You also create the empty Spring Boot project everyone else fills in, set up GitHub, review pull requests, and keep the README honest.

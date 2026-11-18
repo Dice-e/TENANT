@@ -6,6 +6,61 @@ Read `CLAUDE.md` first. All code below is a **plan or example**. None of it has 
 
 ---
 
+## Taglish: Step-by-step (simulan dito)
+
+Ito ang mabilis na bersyon sa Taglish para sa **Member 2 (Database: entity, DTO, repository)**. Nasa ibaba ang buong paliwanag sa English (mga section 1 hanggang 19), at doon din nakasulat ang code na halimbawa. Hindi nagbago ang mga numero ng section.
+
+Paalala: ang code sa guide na ito ay halimbawa pa lang at hindi pa napapatakbo. Ikaw ang magpapatakbo at magte-test, at ikaw ang magsasabi kung ano ang totoong nangyari.
+
+### A. Unang setup (isang beses lang)
+
+1. Buksan ang email mo at tanggapin ang invite ng GitHub para sa repo na `Dice-e/TENANT`.
+2. Sa **GitHub Desktop**: **File > Clone repository** > piliin ang `Dice-e/TENANT` > **Clone**.
+3. I-click ang **Current Branch** at piliin ang branch mo: `feature/member-02-data-model`. Kung wala sa listahan, i-click muna ang **Fetch origin**.
+4. **Branch > Update from develop**. Importante ito para makuha mo ang skeleton ng project at ang gawa ng iba.
+5. Buksan ang folder sa **IntelliJ**: **File > Open** > piliin ang `pom.xml` > **Open as Project**. Hintayin matapos ang loading sa baba. (Kung VS Code: **File > Open Folder**.)
+6. Siguraduhing Java 17 pataas ang gamit: **File > Project Structure > Project > SDK**. Kung wala, **Add SDK > Download JDK > 21**.
+7. Subukan kung tumatakbo: buksan ang `TenantApplication.java` > i-click ang green ▶ > **Run**. Dapat makita mo ang `Started TenantApplication`. I-stop gamit ang red ■.
+
+### B. Ang gagawin mo
+
+1. Sa `src/main/java/com/tenant/app`, gumawa ng tatlong package (folder): `entity`, `dto`, `repository`. (IntelliJ: right-click > New > Package.)
+2. **T-05:** Gawin ang `RentPaymentRecord` sa `entity`. Ipa-explain kay Claude ang halimbawa sa section 3.1 ng guide, linya por linya, bago mo ito gamitin.
+3. Patakbuhin ang app. Sa console dapat may `create table rent_payment_record`. Kung wala, i-paste kay Claude ang totoong error.
+4. **T-06:** Gawin ang `PaymentRecordRequest` at `PaymentRecordResponse` bilang `record` sa `dto`. Walang `id` sa request.
+5. **T-07:** Gawin ang `PaymentRecordRepository` sa `repository` na may `findByUnitNumber`, `existsByReferenceNumber`, at `existsByReferenceNumberAndIdNot`.
+6. Patakbuhin ulit ang app. Dapat makita pa rin ang `Started TenantApplication`. Kapag may typo sa pangalan ng method, hindi mag-start ang app.
+7. (Optional) Gumawa ng repository test (nasa section 11 ng guide). IntelliJ: right-click sa test class > Run. Isulat ang totoong resulta.
+8. Sabihan sina Member 3 at Member 6 kung anong fields at setters ang ginawa mo.
+9. Mauna kang mag-PR at ma-merge sa `develop`, dahil kailangan ito ng iba.
+
+### C. Paano gamitin ang Claude
+
+1. Sa Claude, i-upload ang `CLAUDE.md`, ang guide mo (`member-guides/MEMBER-02.md`), at ang SD1 Chapter 4 PDF (ipapadala ni Member 1 sa chat, wala ito sa GitHub). Idagdag ang files ng ibang member na kailangan mo: wala, ikaw ang mauuna.
+2. I-paste ang **master prompt** (section 10 ng guide na ito).
+3. Isa-isang phase lang. Huwag magpa-generate ng lahat nang sabay.
+4. Pagkatapos ng bawat phase, patakbuhin at i-test mo. I-paste kay Claude ang **totoong** output o error, hindi ang kuwento mo lang.
+5. Sagutin ang mga tanong ni Claude. Kung hindi mo masagot, ipaturo ulit hanggang maintindihan mo.
+
+### D. Kapag tapos na at gumagana
+
+1. Sa GitHub Desktop, tingnan ang **Changes**. Dapat sarili mong files lang ang nandoon. Kung may ibang file, huminto at magtanong kay Member 1.
+2. Isulat ang summary (hal. `Add RentPaymentRecord entity`) at i-click ang **Commit to feature/member-02-data-model**.
+3. I-click ang **Push origin**.
+4. **Branch > Create pull request**. Sa **base**, dapat `develop` (HINDI `main`). Sa compare, `feature/member-02-data-model`.
+5. Punan ang PR template sa `GITHUB_WORKFLOW.md`, kasama ang **totoong** test result (console o Postman screenshot).
+6. Ilipat ang issue mo sa **Review** sa board at magpa-review sa ibang member.
+7. **Huwag i-merge ang sarili mong PR.** Ayusin ang comments ng reviewer, mag-commit, at mag-push ulit.
+8. Pagkatapos ma-merge: **Fetch origin**, tapos **Branch > Update from develop** bago ang susunod na task.
+
+### E. Kapag may problema
+
+1. I-copy ang **buong** error text (o mag-screenshot), hindi ang buod lang.
+2. I-paste kay Claude at sabihin kung anong file at anong ginawa mo bago lumabas.
+3. Kung hindi pa rin malutas, i-send sa group chat kay Member 1.
+
+---
+
 ## 1. Your role and mission
 
 You build the **data foundation**: the Java class that matches the database table, the two small classes that carry data in and out of the API, and the repository that saves and finds records. Everyone else builds on your work, so merge it early.
