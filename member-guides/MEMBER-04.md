@@ -6,6 +6,61 @@ Read `CLAUDE.md` first. All code below is a **plan or example**. Nothing has bee
 
 ---
 
+## Taglish: Step-by-step (simulan dito)
+
+Ito ang mabilis na bersyon sa Taglish para sa **Member 4 (API: controllers)**. Nasa ibaba ang buong paliwanag sa English (mga section 1 hanggang 19), at doon din nakasulat ang code na halimbawa. Hindi nagbago ang mga numero ng section.
+
+Paalala: ang code sa guide na ito ay halimbawa pa lang at hindi pa napapatakbo. Ikaw ang magpapatakbo at magte-test, at ikaw ang magsasabi kung ano ang totoong nangyari.
+
+### A. Unang setup (isang beses lang)
+
+1. Buksan ang email mo at tanggapin ang invite ng GitHub para sa repo na `Dice-e/TENANT`.
+2. Sa **GitHub Desktop**: **File > Clone repository** > piliin ang `Dice-e/TENANT` > **Clone**.
+3. I-click ang **Current Branch** at piliin ang branch mo: `feature/member-04-api`. Kung wala sa listahan, i-click muna ang **Fetch origin**.
+4. **Branch > Update from develop**. Importante ito para makuha mo ang skeleton ng project at ang gawa ng iba.
+5. Buksan ang folder sa **IntelliJ**: **File > Open** > piliin ang `pom.xml` > **Open as Project**. Hintayin matapos ang loading sa baba. (Kung VS Code: **File > Open Folder**.)
+6. Siguraduhing Java 17 pataas ang gamit: **File > Project Structure > Project > SDK**. Kung wala, **Add SDK > Download JDK > 21**.
+7. Subukan kung tumatakbo: buksan ang `TenantApplication.java` > i-click ang green ▶ > **Run**. Dapat makita mo ang `Started TenantApplication`. I-stop gamit ang red ■.
+
+### B. Ang gagawin mo
+
+1. **Bago magsimula:** hintayin na naka-merge sa `develop` ang service ni Member 3. Habang naghihintay, i-install ang **Postman** at ipa-explain kay Claude ang REST at status codes.
+2. **Branch > Update from develop** ulit bago magsimula.
+3. Gumawa ng package na `controller`, tapos ang `PaymentRecordController` (halimbawa sa section 3.1 ng guide).
+4. **T-11:** GET list (may optional na `unitNumber`) at GET by id. Test sa Postman: `http://localhost:8080/api/payment-records`.
+5. **T-12:** POST (201), PUT (200), at DELETE (204) na may `@Valid @RequestBody`.
+6. I-test ang bawat isa sa Postman. Mag-screenshot ng status code at body. Gamitin ang sample JSON sa section 11 ng guide.
+7. **T-13:** Isulat ang `docs/API_ENDPOINTS.md`. **Totoong response lang** ang ilalagay, hindi gawa-gawa.
+8. Paalala: kapag na-merge na ang security ni Member 5, kakailanganin na ng login at CSRF token para sa POST, PUT, at DELETE. Sundin ang `docs/API_TESTING_GUIDE.md`.
+9. Walang business rules sa controller, at hindi dapat tumawag sa repository. Service lang ang tinatawag.
+
+### C. Paano gamitin ang Claude
+
+1. Sa Claude, i-upload ang `CLAUDE.md`, ang guide mo (`member-guides/MEMBER-04.md`), at ang SD1 Chapter 4 PDF (ipapadala ni Member 1 sa chat, wala ito sa GitHub). Idagdag ang files ng ibang member na kailangan mo: `PaymentRecordService` at ang DTOs.
+2. I-paste ang **master prompt** (section 10 ng guide na ito).
+3. Isa-isang phase lang. Huwag magpa-generate ng lahat nang sabay.
+4. Pagkatapos ng bawat phase, patakbuhin at i-test mo. I-paste kay Claude ang **totoong** output o error, hindi ang kuwento mo lang.
+5. Sagutin ang mga tanong ni Claude. Kung hindi mo masagot, ipaturo ulit hanggang maintindihan mo.
+
+### D. Kapag tapos na at gumagana
+
+1. Sa GitHub Desktop, tingnan ang **Changes**. Dapat sarili mong files lang ang nandoon. Kung may ibang file, huminto at magtanong kay Member 1.
+2. Isulat ang summary (hal. `Add RentPaymentRecord entity`) at i-click ang **Commit to feature/member-04-api**.
+3. I-click ang **Push origin**.
+4. **Branch > Create pull request**. Sa **base**, dapat `develop` (HINDI `main`). Sa compare, `feature/member-04-api`.
+5. Punan ang PR template sa `GITHUB_WORKFLOW.md`, kasama ang **totoong** test result (console o Postman screenshot).
+6. Ilipat ang issue mo sa **Review** sa board at magpa-review sa ibang member.
+7. **Huwag i-merge ang sarili mong PR.** Ayusin ang comments ng reviewer, mag-commit, at mag-push ulit.
+8. Pagkatapos ma-merge: **Fetch origin**, tapos **Branch > Update from develop** bago ang susunod na task.
+
+### E. Kapag may problema
+
+1. I-copy ang **buong** error text (o mag-screenshot), hindi ang buod lang.
+2. I-paste kay Claude at sabihin kung anong file at anong ginawa mo bago lumabas.
+3. Kung hindi pa rin malutas, i-send sa group chat kay Member 1.
+
+---
+
 ## 1. Your role and mission
 
 You build the **front door** of the backend: the controller that receives web requests, passes them to Member 3's service, and sends back the right status code and JSON. You also write the endpoint documentation.
