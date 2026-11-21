@@ -10,24 +10,30 @@ TENANT helps a small, **fictional** rental organization (Sampaguita Apartments) 
 
 | Area | Status |
 |---|---|
-| Planning and documentation | In progress (Phase 1) |
-| Backend (Spring Boot, JPA, security, validation) | Not started |
-| Frontend (Palette 2) | Not started |
+| Planning and documentation | Done: project rules, scope, architecture and the six member guides are written |
+| Backend: entity, DTOs, repository, exception handler | Merged into `develop`. Not yet run together as one app |
+| Backend: service (Member 3) | In progress, on Member 3's branch only. Not merged |
+| Backend: controllers, security, sample data | Not started |
+| Frontend: Palette 2 page shell | Merged into `develop`. Seen loading at `http://localhost:8080` |
+| Frontend: responsive sidebar and bottom tab bar | In progress. Not merged |
+| Frontend: screens connected to the API | Not started |
 | Ten SD1 checks | Not run |
 
-The sections below describe the **planned** setup. They are filled in with real, tested commands as each phase finishes. Nothing here has been run yet.
+Last updated: 2026-11-21, from what is on GitHub. A status is only marked as running when someone has run it and seen the result.
+
+The sections below describe the planned setup and are filled in with real, tested commands as each phase finishes. So far, only the Palette 2 page shell has been seen running at `http://localhost:8080`. The API, sign-in and demo accounts are not built yet, so the steps that need them cannot be followed yet.
 
 ## What it uses
 
 Java 17, Spring Boot 3.x, Maven, Spring Data JPA, Spring Security (HTTP Basic, BCrypt), Bean Validation, H2 in-memory database, and a plain HTML/CSS/JavaScript frontend served by Spring Boot.
 
-## Quick start (to be confirmed in Phase 3)
+## Quick start (partly confirmed: the sign-in step does not exist yet)
 
 1. Install Java 17 or newer, Maven (or use the project's Maven wrapper), and Git.
 2. Clone the repository and open the folder in your IDE.
 3. Run the app from the project folder: `mvn spring-boot:run`
 4. Open `http://localhost:8080`.
-5. Sign in with a demo account (below).
+5. Sign in with a demo account (below). *Not built yet.*
 
 ## Demo accounts (demo-only, set up at startup in Phase 5)
 
