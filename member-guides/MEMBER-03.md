@@ -6,6 +6,60 @@ Read `CLAUDE.md` first. All code below is a **plan or example**. Nothing has bee
 
 ---
 
+## Taglish: Step-by-step (simulan dito)
+
+Ito ang mabilis na bersyon sa Taglish para sa **Member 3 (Service at business rules)**. Nasa ibaba ang buong paliwanag sa English (mga section 1 hanggang 19), at doon din nakasulat ang code na halimbawa. Hindi nagbago ang mga numero ng section.
+
+Paalala: ang code sa guide na ito ay halimbawa pa lang at hindi pa napapatakbo. Ikaw ang magpapatakbo at magte-test, at ikaw ang magsasabi kung ano ang totoong nangyari.
+
+### A. Unang setup (isang beses lang)
+
+1. Buksan ang email mo at tanggapin ang invite ng GitHub para sa repo na `Dice-e/TENANT`.
+2. Sa **GitHub Desktop**: **File > Clone repository** > piliin ang `Dice-e/TENANT` > **Clone**.
+3. I-click ang **Current Branch** at piliin ang branch mo: `feature/member-03-service`. Kung wala sa listahan, i-click muna ang **Fetch origin**.
+4. **Branch > Update from develop**. Importante ito para makuha mo ang skeleton ng project at ang gawa ng iba.
+5. Buksan ang folder sa **IntelliJ**: **File > Open** > piliin ang `pom.xml` > **Open as Project**. Hintayin matapos ang loading sa baba. (Kung VS Code: **File > Open Folder**.)
+6. Siguraduhing Java 17 pataas ang gamit: **File > Project Structure > Project > SDK**. Kung wala, **Add SDK > Download JDK > 21**.
+7. Subukan kung tumatakbo: buksan ang `TenantApplication.java` > i-click ang green ▶ > **Run**. Dapat makita mo ang `Started TenantApplication`. I-stop gamit ang red ■.
+
+### B. Ang gagawin mo
+
+1. **Bago magsimula:** hintayin na naka-merge sa `develop` ang gawa ni Member 2 (entity, DTO, repository) at ni Member 6 (exceptions, T-19). Sa github.com, buksan ang branch `develop` at tingnan kung may folders na `entity`, `dto`, `repository`, at `exception`. Habang naghihintay, ipa-explain kay Claude ang "service layer".
+2. **Branch > Update from develop** ulit bago magsimula.
+3. Gumawa ng package na `service`.
+4. **T-08:** Gawin ang `PaymentRecordService` na may constructor injection. Mga method: `create`, `list`, `getById`, `update`, `delete`, at ang private na `toResponse`.
+5. **T-09 (ang pinakaimportanteng rule):** Sa create, i-reject kung may kaparehong reference number. Sa update, i-reject LANG kung **ibang** record ang may reference na iyon (gamitin ang `existsByReferenceNumberAndIdNot`). Dapat makapag-update ang record na hindi binabago ang sarili niyang reference.
+6. Mag-test gamit ang unit tests (nasa section 11 ng guide). IntelliJ: right-click sa test class > Run. Isulat ang totoong resulta (hal. "5 tests, 0 failures").
+7. **T-10:** Gawin ang `SampleDataSeeder` na may 5 hanggang 8 inventadong sample records. Patakbuhin at tingnan ang `insert` sa console.
+8. Tandaan: walang `ResponseEntity` o `HttpStatus` sa service. Hindi dapat lumabas ang entity sa service, DTO lang.
+
+### C. Paano gamitin ang Claude
+
+1. Sa Claude, i-upload ang `CLAUDE.md`, ang guide mo (`member-guides/MEMBER-03.md`), at ang SD1 Chapter 4 PDF (ipapadala ni Member 1 sa chat, wala ito sa GitHub). Idagdag ang files ng ibang member na kailangan mo: `RentPaymentRecord`, ang DTOs, `PaymentRecordRepository`, at ang mga exception class ni Member 6.
+2. I-paste ang **master prompt** (section 10 ng guide na ito).
+3. Isa-isang phase lang. Huwag magpa-generate ng lahat nang sabay.
+4. Pagkatapos ng bawat phase, patakbuhin at i-test mo. I-paste kay Claude ang **totoong** output o error, hindi ang kuwento mo lang.
+5. Sagutin ang mga tanong ni Claude. Kung hindi mo masagot, ipaturo ulit hanggang maintindihan mo.
+
+### D. Kapag tapos na at gumagana
+
+1. Sa GitHub Desktop, tingnan ang **Changes**. Dapat sarili mong files lang ang nandoon. Kung may ibang file, huminto at magtanong kay Member 1.
+2. Isulat ang summary (hal. `Add RentPaymentRecord entity`) at i-click ang **Commit to feature/member-03-service**.
+3. I-click ang **Push origin**.
+4. **Branch > Create pull request**. Sa **base**, dapat `develop` (HINDI `main`). Sa compare, `feature/member-03-service`.
+5. Punan ang PR template sa `GITHUB_WORKFLOW.md`, kasama ang **totoong** test result (console o Postman screenshot).
+6. Ilipat ang issue mo sa **Review** sa board at magpa-review sa ibang member.
+7. **Huwag i-merge ang sarili mong PR.** Ayusin ang comments ng reviewer, mag-commit, at mag-push ulit.
+8. Pagkatapos ma-merge: **Fetch origin**, tapos **Branch > Update from develop** bago ang susunod na task.
+
+### E. Kapag may problema
+
+1. I-copy ang **buong** error text (o mag-screenshot), hindi ang buod lang.
+2. I-paste kay Claude at sabihin kung anong file at anong ginawa mo bago lumabas.
+3. Kung hindi pa rin malutas, i-send sa group chat kay Member 1.
+
+---
+
 ## 1. Your role and mission
 
 You write the **brain** of TENANT: the service that creates, finds, updates and deletes records, enforces the "unique reference number" rule, and converts between entities and DTOs. You also add a few invented sample records at startup.
